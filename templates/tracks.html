@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title mb-30">
+            <h2>Tracks</h2>
+          </div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper mb-30">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    tracks
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== tables-wrapper start ========== -->
+      <div class="tables-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card-style mb-30">
+              <a href="{% url 'track_create_view' %}" class="btn btn-primary">+ Add Track</a>
+          
+              <div class="table-wrapper table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="lead-info"><h6>Name</h6></th>
+                      <th class="lead-email"><h6>Number</h6></th>
+                      <th class="lead-email"><h6>Album</h6></th>
+                      <th class="lead-email"><h6>Artist</h6></th>
+                      <th><h6>Action</h6></th>
+                    </tr>
+                    <!-- end table row-->
+                  </thead>
+                  <tbody>
+                    {% for track in tracks %}  
+                    <tr>
+                      <td>
+                        <div class="lead">
+                          <div class="lead-text">
+                            <p>{{track.name}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <p>{{track.number}}</p>
+                      </td>
+                      <td>
+                          <p>{{track.album.name}}</p>
+                      </td>
+                      <td>
+                          <p>{{track.album.artist.name}}</p>
+                      </td>
+                      <td><a href="{% url 'track_update_view' track.id %}"><i class="lni lni-pencil"></i></a></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                <!-- end table -->
+
+                <!-- pagination start  -->
+                <div class="pagination">
+                  <span class="step-links">
+                      {% if tracks.has_previous %}
+                          <a href="?page=1">&laquo; first</a>
+                          <a href="?page={{ tracks.previous_page_number }}">previous</a>
+                      {% endif %}
+              
+                      <span class="current">
+                          Page {{ tracks.number }} of {{ tracks.paginator.num_pages }}.
+                      </span>
+              
+                      {% if tracks.has_next %}
+                          <a href="?page={{ tracks.next_page_number }}">next</a>
+                          <a href="?page={{ tracks.paginator.num_pages }}">last &raquo;</a>
+                      {% endif %}
+                  </span>
+              </div>
+                <!-- pagination end  -->
+
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+
+  
+    <!-- ========== tables-wrapper end ========== -->
+  </div>
+
+
+
+{% endblock %}

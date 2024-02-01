@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-style mb-30">
+
+    
+  
+    <form  method="post">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col-12 p-2">
+          <div class="input-style-1">
+            {{form}}
+          </div>
+        </div>
+        
+        <!-- end col -->
+        <div class="col-12">
+          <div class=" button-group d-flex justify-content-center flex-wrap">
+            <button
+              class="
+                main-btn
+                primary-btn
+                btn-hover
+                w-100
+                text-center
+              "
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+    </form>
+  </div>
+
+  <script>
+    $('#id_tracks').select2();
+  </script>
+
+{% endblock %}
